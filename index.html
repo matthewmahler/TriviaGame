@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Trivia Game</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="jumbotron-fluid background py-5">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 text-center justify-content-center">
+          <h1>Trivia Time!</h1>
+          <button id="new-game-button">
+            <i class="fas fa-gamepad"></i>
+            Start a New Game!
+          </button>
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+    </div>
+
+  
+  <div class="container-fluid game-space">
+    <div class="row">
+
+      <div class="col-md-12 py-3 my-3">
+        <div class="jumbotron-fluid question-box justify-content-center">
+          <h2>
+            Placeholder for Questions
+          </h2>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+
+      <div class="col-md-12 py-3 my-3">
+        <div class="jumbotron-fluid answer-box justify-content-center">
+          <h3>
+            Choose Wisely
+            </h3>
+            <ul>
+              <li class="answer" id="a">
+                A
+              </li>
+              <li class="answer" id="b">
+                B
+              </li>
+              <li class="answer" id="c">
+                C
+              </li>
+              <li class="answer" id="d">
+                D
+              </li>
+            </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="./assets/javascript/app.js"></script>
+</body>
+
+</html>
