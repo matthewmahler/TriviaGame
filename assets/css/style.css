@@ -63,7 +63,7 @@ h5 {
 }
 
 .game-space {
-  background: linear-gradient(to right, rgba(4, 206, 199, 0.904), rgba(0, 125, 132, 0.911));
+  background: linear-gradient(to right, rgba(4, 206, 199, 0.8), rgba(0, 125, 132, 0.8));
   border: #131317 solid 5px;
 }
 
@@ -77,13 +77,12 @@ h5 {
 }
 
 .score-board {
-  background: linear-gradient(to right, rgba(2, 235, 227, 0.897), rgba(0, 125, 132, 0.911));
+  background: linear-gradient(to right, rgba(2, 235, 227, 0.8), rgba(0, 125, 132, 0.8));
   padding: 10px;
   border: #131317 solid 5px;
 }
 
 ul {
-  text-align: center;
   padding: 0;
   list-style-type: none;
   font-weight: 900;
@@ -126,4 +125,35 @@ li {
 #final-answer-button:active {
   box-shadow: 0 0 #5f5f5e;
   top: 6px;
+}
+
+.answer-button {
+  position: relative;
+  text-align: left;
+  outline: none;
+  border: white 1px solid;
+  cursor: pointer;
+  background-color: #1A0E1C;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 6px #5f5f5e;
+  margin-bottom: 10px;
+}
+
+
+.answer-button:active {
+  box-shadow: 0 0 #5f5f5e;
+  top: 6px;
+  background-color: red;
+}
+
+.selected {
+  box-shadow: 0 0 #5f5f5e;
+  top: 0px;
+  background-color: red;
 }
