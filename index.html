@@ -14,61 +14,95 @@
 
 <body>
   <div class="wrapper">
-    <div class="jumbotron-fluid background py-5">
+    <div class="jumbotron-fluid background py-3">
       <div class="row align-items-center">
-        <div class="col-md-4">
+        <div class="col-md-3">
+          <div class="card score-board py-1">
+            <div class="card-header">
+              <h3>
+                Scoreboard
+              </h3>
+            </div>
+            <div class="card-body">
+              <h5>
+                Questions Correct:
+                <span id="correct"></span>
+              </h5>
+              <h5>
+                Attempts:
+                <span id="attempts"></span>
+              </h5>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 text-center justify-content-center">
-          <h1>Trivia Time!</h1>
+        <div class="col-md-6 text-center justify-content-center">
+          <img src="./assets/images/Trivia.png" alt="Trivia!" id="logo">
+          <br>
           <button id="new-game-button">
             <i class="fas fa-gamepad"></i>
             Start a New Game!
           </button>
         </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+    </div>
+    <div class="row py-2">
+    </div>
+
+    <div class="container-fluid">
+      <div class="row game-space">
+
+        <div class="col-md-8">
+          <div class="jumbotron-fluid question-box justify-content-center py-3">
+            <h2 id="question">
+              Placeholder for Questions
+            </h2>
+
+          </div>
+        </div>
         <div class="col-md-4">
-        </div>
-      </div>
-    </div>
-
-  
-  <div class="container-fluid game-space">
-    <div class="row">
-
-      <div class="col-md-12 py-3 my-3">
-        <div class="jumbotron-fluid question-box justify-content-center">
-          <h2>
-            Placeholder for Questions
-          </h2>
-        </div>
-      </div>
-
-    </div>
-    <div class="row">
-
-      <div class="col-md-12 py-3 my-3">
-        <div class="jumbotron-fluid answer-box justify-content-center">
-          <h3>
-            Choose Wisely
+          <div class="jumbotron-fluid answer-box justify-content-center py-3">
+            <h3>
+              Choose Wisely
             </h3>
             <ul>
-              <li class="answer" id="a">
-                A
+              <li>
+                A:
+                <span class="answer" id="answer-a">
+                </span>
               </li>
-              <li class="answer" id="b">
-                B
+              <li>
+                B:
+                <span class="answer" id="answer-b">
+                </span>
               </li>
-              <li class="answer" id="c">
-                C
+              <li>
+                C:
+                <span class="answer" id="answer-c">
+                </span>
               </li>
-              <li class="answer" id="d">
-                D
+              <li>
+                D:
+                <span class="answer" id="answer-d">
+                </span>
               </li>
             </ul>
+            <div class="final-answer-button">
+              <button id="final-answer-button">
+                FINAL ANSWER
+              </button>
+            </div>
+          </div>
         </div>
+
       </div>
 
+
+
+
+
     </div>
-  </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

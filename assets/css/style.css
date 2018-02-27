@@ -1,25 +1,39 @@
+
+
 body {
-  color: white;
-  background-image: url("../images/background-image.jpg"); 
+  width: 100%;
+  color: #1A0E1C;
+  background-image: url("../images/background-image.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 }
 
-h1 {
-  color: white;
-  padding-bottom: 20px;
+#logo {
+  width: 400px;
+  margin-bottom: 20px;
 }
 
 h2 {
+  font-weight: 900;
   text-align: center;
   opacity: 1;
+  text-shadow: -1px 0 #ffffff, 0 1px #ffffff, 1px 0 #ffffff, 0 -1px #ffffff
 }
 
 h3 {
+  font-weight: 900;
   text-align: center;
-  text-decoration: underline solid white;
+  text-decoration: underline solid #1A0E1C;
   opacity: 1;
+  text-shadow: -1px 0 #ffffff, 0 1px #ffffff, 1px 0 #ffffff, 0 -1px #ffffff
+}
+
+h5 {
+  font-weight: 900;
+  opacity: 1;
+  text-shadow: -1px 0 #ffffff, 0 1px #ffffff, 1px 0 #ffffff, 0 -1px #ffffff;
+  padding: 10px;
 }
 
 #new-game-button {
@@ -30,7 +44,7 @@ h3 {
   position: relative;
   font-size: 22px;
   font-weight: bold;
-  color: white;
+  color: #fff;
   text-transform: uppercase;
   letter-spacing: 2px;
   padding: 15px;
@@ -48,18 +62,24 @@ h3 {
   top: 6px;
 }
 
+.game-space {
+  background: linear-gradient(to right, rgba(4, 206, 199, 0.904), rgba(0, 125, 132, 0.911));
+  border: #131317 solid 5px;
+}
+
 .question-box {
-  background-color: #466060a8;
-  
   padding: 10px;
- 
 }
 
 .answer-box {
-  background-color: #57886Ca8;
-  
   padding: 10px;
+  border-left: #131317 solid 5px;
+}
 
+.score-board {
+  background: linear-gradient(to right, rgba(2, 235, 227, 0.897), rgba(0, 125, 132, 0.911));
+  padding: 10px;
+  border: #131317 solid 5px;
 }
 
 ul {
@@ -68,9 +88,42 @@ ul {
   list-style-type: none;
   font-weight: 900;
   font-size: 120%;
- }
+}
 
-.answer {
+li {
   list-style: none;
   padding: 5px 0px;
+}
+
+.final-answer-button {
+  width: 100%;
+  text-align: center;
+  align-content: center;
+}
+
+#final-answer-button {
+  position: relative;
+  text-align: center;
+  outline: none;
+  border: white 1px solid;
+  cursor: pointer;
+  background-color: #1A0E1C;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 0 6px #5f5f5e;
+}
+
+#final-answer-button:hover {
+  box-shadow: 0 4px #5f5f5e;
+  top: 2px;
+}
+
+#final-answer-button:active {
+  box-shadow: 0 0 #5f5f5e;
+  top: 6px;
 }
