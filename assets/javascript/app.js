@@ -1,119 +1,164 @@
-$('document').ready(function(){
-var $newGameButton = document.getElementById('new-game-button');
-$newGameButton.addEventListener('click', newGame);
+var allAnswers;
+var correct_answer;
+var trivia;
 var q = [Math.floor(Math.random() * 50) + 1];
 var i = [0, 1, 2, 3];
-//go get questions when new game is clicked
-function newGame() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var trivia = JSON.parse(this.responseText);
-      var q = [Math.floor(Math.random() * 50) + 1];
-      var allAnswers = trivia.results[q].incorrect_answers.concat(trivia.results[q].correct_answer);
-      
 
-      function shuffle(a) {
-        for (let i = a.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+shuffle(i);
+
+$('document').ready(function () {
+
+  var $newGameButton = document.getElementById('new-game-button');
+  $newGameButton.addEventListener('click', newGame);
+
+  //go get questions when new game is clicked
+  function newGame() {
+if (selectedAnswer === null){
+  return;
+}
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        trivia = JSON.parse(this.responseText);
+        var q = [Math.floor(Math.random() * 50) + 1];
+        correct_answer = trivia.results[q].correct_answer;
+        allAnswers = trivia.results[q].incorrect_answers.concat(trivia.results[q].correct_answer);
+
+        document.getElementById("question").innerHTML = trivia.results[q].question;
+        document.getElementById("answer-a").innerHTML = allAnswers[i[0]];
+        document.getElementById("answer-b").innerHTML = allAnswers[i[1]];
+        document.getElementById("answer-c").innerHTML = allAnswers[i[2]];
+        document.getElementById("answer-d").innerHTML = allAnswers[i[3]];
+
+        console.log(q);
+        console.log(i);
+        console.log(trivia.results[q]);
+        console.log(allAnswers);
+        console.log(trivia.results[q].correct_answer)
       }
-      shuffle(i);
+    };
+    xmlhttp.open("GET", "https://opentdb.com/api.php?amount=50&type=multiple", true);
+    xmlhttp.send();
+  }
 
-      document.getElementById("question").innerHTML = trivia.results[q].question;
-      document.getElementById("answer-a").innerHTML = allAnswers[i[0]];
-      document.getElementById("answer-b").innerHTML = allAnswers[i[1]];
-      document.getElementById("answer-c").innerHTML = allAnswers[i[2]];
-      document.getElementById("answer-d").innerHTML = allAnswers[i[3]];
-      console.log(q)
-      console.log(i)
-      console.log(trivia.results[q].correct_answer)
-      console.log(allAnswers)
+
+
+  //answer buttons
+
+  var selectedAnswer
+
+  var $selectedAnswerA = document.getElementById('answer-button-a');
+  $selectedAnswerA.addEventListener('click', selectA);
+  var $selectedAnswerB = document.getElementById('answer-button-b');
+  $selectedAnswerB.addEventListener('click', selectB);
+  var $selectedAnswerC = document.getElementById('answer-button-c');
+  $selectedAnswerC.addEventListener('click', selectC);
+  var $selectedAnswerD = document.getElementById('answer-button-d');
+  $selectedAnswerD.addEventListener('click', selectD);
+
+  function selectA() {
+    var selected = document.getElementById('answer-button-a');
+    selected.classList.add('selected');
+    var selected = document.getElementById('answer-button-b');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-c');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-d');
+    selected.classList.remove('selected');
+    selectedAnswer = allAnswers[i[0]];
+    console.log(allAnswers[i[0]]);
+    console.log(selectedAnswer);
+  }
+
+  function selectB() {
+    var selected = document.getElementById('answer-button-b');
+    selected.classList.add('selected');
+    var selected = document.getElementById('answer-button-a');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-c');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-d');
+    selected.classList.remove('selected');
+    selectedAnswer = allAnswers[i[1]];
+    console.log(allAnswers[i[1]]);
+    console.log(selectedAnswer);
+  }
+
+  function selectC() {
+    var selected = document.getElementById('answer-button-c');
+    selected.classList.add('selected');
+    var selected = document.getElementById('answer-button-a');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-b');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-d');
+    selected.classList.remove('selected');
+    selectedAnswer = allAnswers[i[2]];
+    console.log(allAnswers[i[2]]);
+    console.log(selectedAnswer);
+
+  }
+
+  function selectD() {
+    var selected = document.getElementById('answer-button-d');
+    selected.classList.add('selected');
+    var selected = document.getElementById('answer-button-a');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-b');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-c');
+    selected.classList.remove('selected');
+    selectedAnswer = allAnswers[i[3]];
+    console.log(allAnswers[i[3]]);
+    console.log(selectedAnswer);
+  }
+
+  var wrong = 1;
+  var correct = 1;
+
+  var $selectedFinalAnswer = document.getElementById('final-answer-button');
+  $selectedFinalAnswer.addEventListener('click', finalAnswer);
+
+  function finalAnswer() {
+    if (selectedAnswer === null) {
+      return;
     }
-  };
-  xmlhttp.open("GET", "https://opentdb.com/api.php?amount=50&type=multiple", true);
-  xmlhttp.send();
-}
+    if (selectedAnswer == correct_answer) {
+      document.getElementById("correct").innerHTML = correct++;
+      var selected = document.getElementById('answer-button-d');
+      selected.classList.remove('selected');
+      var selected = document.getElementById('answer-button-a');
+      selected.classList.remove('selected');
+      var selected = document.getElementById('answer-button-b');
+      selected.classList.remove('selected');
+      var selected = document.getElementById('answer-button-c');
+      selected.classList.remove('selected');
+      newGame();
+      selectedAnswer = null;
+    } else {
+      document.getElementById("wrong").innerHTML = wrong++;
+      var selected = document.getElementById('answer-button-d');
+      selected.classList.remove('selected');
+      var selected = document.getElementById('answer-button-a');
+      selected.classList.remove('selected');
+      var selected = document.getElementById('answer-button-b');
+      selected.classList.remove('selected');
+      var selected = document.getElementById('answer-button-c');
+      selected.classList.remove('selected');
+      newGame();
+      selectedAnswer = null;
+    }
+    console.log(correct_answer);
 
-
-
-//answer buttons
-
-var selectedAnswer = "";
-
-var $selectedAnswerA = document.getElementById('answer-button-a');
-$selectedAnswerA.addEventListener('click', selectA);
-var $selectedAnswerB = document.getElementById('answer-button-b');
-$selectedAnswerB.addEventListener('click', selectB);
-var $selectedAnswerC = document.getElementById('answer-button-c');
-$selectedAnswerC.addEventListener('click', selectC);
-var $selectedAnswerD = document.getElementById('answer-button-d');
-$selectedAnswerD.addEventListener('click', selectD);
-
-function selectA() {
-  var selected = document.getElementById('answer-button-a');
-  selected.classList.add('selected');
-  var selected = document.getElementById('answer-button-b');
-  selected.classList.remove('selected');
-  var selected = document.getElementById('answer-button-c');
-  selected.classList.remove('selected');
-  var selected = document.getElementById('answer-button-d');
-  selected.classList.remove('selected');
-  selectedAnswer = "a";
-  console.log(selectedAnswer);
-}
-
-function selectB() {
-  var selected = document.getElementById('answer-button-b');
-  selected.classList.add('selected');
-  var selected = document.getElementById('answer-button-a');
-  selected.classList.remove('selected');
-  var selected = document.getElementById('answer-button-c');
-  selected.classList.remove('selected');
-  var selected = document.getElementById('answer-button-d');
-  selected.classList.remove('selected');
-  selectedAnswer = "b";
-  console.log(selectedAnswer);
-}
-
-function selectC() {
-  var selected = document.getElementById('answer-button-c');
-  selected.classList.add('selected');
-  var selected = document.getElementById('answer-button-a');
-  selected.classList.remove('selected');
-  var selected = document.getElementById('answer-button-b');
-  selected.classList.remove('selected');
-  var selected = document.getElementById('answer-button-d');
-  selected.classList.remove('selected');
-  selectedAnswer = "c";
-  console.log(selectedAnswer);
-
-}
-
-function selectD() {
-  var selected = document.getElementById('answer-button-d');
-  selected.classList.add('selected');
-  var selected = document.getElementById('answer-button-a');
-  selected.classList.remove('selected');
-  var selected = document.getElementById('answer-button-b');
-  selected.classList.remove('selected');
-  var selected = document.getElementById('answer-button-c');
-  selected.classList.remove('selected');
-  selectedAnswer = "d";
-  console.log(selectedAnswer);
-}
-
-var wrong = 1;
-var correct = 1;
-
-var $selectedFinalAnswer = document.getElementById('final-answer-button');
-$selectedFinalAnswer.addEventListener('click', finalAnswer);
-
-function finalAnswer(){
-
-}
+  }
 
 });
 
