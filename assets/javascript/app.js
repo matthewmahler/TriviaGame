@@ -10,6 +10,7 @@ var correct = 1;
 var gameRunning = false;
 
 
+
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -29,36 +30,13 @@ $('document').ready(function () {
   
   
   function newGame() {
+   
     gameRunning = true;
 
     timer();
-    
+    newQuestion();
     document.getElementById("attempts").innerHTML = attempts;
     document.getElementById("correct").innerHTML = correct;
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        trivia = JSON.parse(this.responseText);
-        var q = [Math.floor(Math.random() * 50) + 1];
-        correct_answer = trivia.results[q].correct_answer;
-        allAnswers = trivia.results[q].incorrect_answers.concat(trivia.results[q].correct_answer);
-
-        document.getElementById("question").innerHTML = trivia.results[q].question;
-        document.getElementById("answer-a").innerHTML = allAnswers[i[0]];
-        document.getElementById("answer-b").innerHTML = allAnswers[i[1]];
-        document.getElementById("answer-c").innerHTML = allAnswers[i[2]];
-        document.getElementById("answer-d").innerHTML = allAnswers[i[3]];
-
-        console.log(q);
-        console.log(i);
-        console.log(trivia.results[q]);
-        console.log(allAnswers);
-        console.log(trivia.results[q].correct_answer)
-      }
-    };
-    xmlhttp.open("GET", "https://opentdb.com/api.php?amount=50&category=15&type=multiple", true);
-    xmlhttp.send();
   }
 
   function newQuestion(){
@@ -174,9 +152,11 @@ $('document').ready(function () {
     if (!gameRunning){
       return;
     }
-    if (correct == 10) {
+    if (correct === 3) {
       setTimeout(alert('YOU WIN'), 1000);
-      attempts = 1;
+      attempts = 1; 
+      correct = 0;
+      
       
     }
 
@@ -229,8 +209,10 @@ $('document').ready(function () {
           }, 300);
 
           attempts = (attempts + 1);
-          clockRunning = false;
           correct = 1;
+        } else if (correct === 3){
+          clearInterval(downloadTimer)
+          clockRunning = false;
         };
 
       }, 1000);
