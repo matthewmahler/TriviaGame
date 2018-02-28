@@ -26,20 +26,18 @@ $('document').ready(function () {
   $newGameButton.addEventListener('click', newGame);
 
   //go get questions when new game is clicked
-  
-  
-  
-  function newGame() {
-   
-    gameRunning = true;
 
+  function newGame() {
+    gameRunning = true;
+    correct = 1;
+    attempts = 1;
     timer();
     newQuestion();
     document.getElementById("attempts").innerHTML = attempts;
     document.getElementById("correct").innerHTML = correct;
   }
 
-  function newQuestion(){
+  function newQuestion() {
     document.getElementById("attempts").innerHTML = attempts;
     document.getElementById("correct").innerHTML = correct;
 
@@ -138,26 +136,25 @@ $('document').ready(function () {
     console.log(selectedAnswer);
   }
 
-
-
   var $selectedFinalAnswer = document.getElementById('final-answer-button');
   $selectedFinalAnswer.addEventListener('click', finalAnswer);
 
   function finalAnswer() {
 
+    if (timeleft === 0) {
+      return;
+    }
+
     if (selectedAnswer === null) {
       return;
     }
-    
-    if (!gameRunning){
+
+    if (!gameRunning) {
       return;
     }
-    if (correct === 3) {
+    if (correct === 10) {
       setTimeout(alert('YOU WIN'), 1000);
-      attempts = 1; 
-      correct = 0;
-      
-      
+      attempts = 1;
     }
 
     if (selectedAnswer == correct_answer) {
@@ -192,8 +189,6 @@ $('document').ready(function () {
       selectedAnswer = null;
       alert('Try Again =)')
     }
-
-
   }
 
   function timer() {
@@ -210,13 +205,16 @@ $('document').ready(function () {
 
           attempts = (attempts + 1);
           correct = 1;
-        } else if (correct === 3){
+          clockRunning = false;
+        } else if (correct === 11) {
           clearInterval(downloadTimer)
           clockRunning = false;
+          document.getElementById("time").textContent = 00;
+          document.getElementById("correct").innerHTML = 0;
         };
 
       }, 1000);
-      
+
       clockRunning = true;
     }
   }
