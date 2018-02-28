@@ -3,6 +3,11 @@ var correct_answer;
 var trivia;
 var q = [Math.floor(Math.random() * 50) + 1];
 var i = [0, 1, 2, 3];
+var clockRunning = false;
+var timeleft;
+var attempts = 1;
+var correct = 0;
+
 
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
@@ -20,9 +25,15 @@ $('document').ready(function () {
 
   //go get questions when new game is clicked
   function newGame() {
-if (selectedAnswer === null){
-  return;
-}
+   
+    
+    
+
+    timer();
+
+
+    document.getElementById("attempts").innerHTML = attempts;
+    document.getElementById("correct").innerHTML = correct;
 
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
@@ -45,7 +56,7 @@ if (selectedAnswer === null){
         console.log(trivia.results[q].correct_answer)
       }
     };
-    xmlhttp.open("GET", "https://opentdb.com/api.php?amount=50&type=multiple", true);
+    xmlhttp.open("GET", "https://opentdb.com/api.php?amount=50&category=15&type=multiple", true);
     xmlhttp.send();
   }
 
@@ -121,16 +132,23 @@ if (selectedAnswer === null){
     console.log(selectedAnswer);
   }
 
-  var wrong = 1;
-  var correct = 1;
+
 
   var $selectedFinalAnswer = document.getElementById('final-answer-button');
   $selectedFinalAnswer.addEventListener('click', finalAnswer);
 
   function finalAnswer() {
+    
     if (selectedAnswer === null) {
       return;
     }
+    if (correct == 9) {
+      setTimeout(alert('YOU WIN'), 500);
+      correct = 0;
+      attempts = 1;
+      newGame();
+    }
+
     if (selectedAnswer == correct_answer) {
       document.getElementById("correct").innerHTML = correct++;
       var selected = document.getElementById('answer-button-d');
@@ -141,10 +159,14 @@ if (selectedAnswer === null){
       selected.classList.remove('selected');
       var selected = document.getElementById('answer-button-c');
       selected.classList.remove('selected');
+      shuffle(i);
       newGame();
       selectedAnswer = null;
+      timeleft = 31;
     } else {
-      document.getElementById("wrong").innerHTML = wrong++;
+      document.getElementById("attempts").innerHTML = attempts;
+      correct = 0;
+      document.getElementById("correct").innerHTML = correct;
       var selected = document.getElementById('answer-button-d');
       selected.classList.remove('selected');
       var selected = document.getElementById('answer-button-a');
@@ -153,14 +175,43 @@ if (selectedAnswer === null){
       selected.classList.remove('selected');
       var selected = document.getElementById('answer-button-c');
       selected.classList.remove('selected');
+      shuffle(i);
       newGame();
       selectedAnswer = null;
+      alert('Try Again =)')
     }
-    console.log(correct_answer);
+
 
   }
 
+  function timer() {
+    if (!clockRunning) {
+      timeleft = 31;
+      var downloadTimer = setInterval(function () {
+        timeleft--;
+        document.getElementById("time").textContent = timeleft;
+        if (timeleft <= 0) {
+          clearInterval(downloadTimer)
+          setTimeout(function () {
+            alert("Times Up!");
+          }, 300);
+          
+          attempts = (attempts + 1);
+          clockRunning = false;
+          
+        };
+
+      }, 1000);
+      clockRunning = true;
+    }
+  }
+
+
+
 });
+
+
+
 
 
 //click new game

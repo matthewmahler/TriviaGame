@@ -14,7 +14,7 @@
 
 <body>
   <div class="wrapper">
-    <div class="jumbotron-fluid background py-3">
+    <div class="jumbotron-fluid background py-2">
       <div class="row align-items-center">
         <div class="col-md-3">
           <div class="card score-board py-1">
@@ -25,12 +25,12 @@
             </div>
             <div class="card-body">
               <h5>
-                 Right:
+                Correct:
                 <span id="correct"></span>
               </h5>
               <h5>
-                Wrong: 
-                <span id="wrong"></span>
+                Attempts:
+                <span id="attempts"></span>
               </h5>
             </div>
           </div>
@@ -38,7 +38,7 @@
         <div class="col-md-6 text-center justify-content-center">
           <img src="./assets/images/Trivia.png" alt="Trivia!" id="logo">
           <br>
-          <button id="new-game-button">
+          <button id="new-game-button" class="button">
             <i class="fas fa-gamepad"></i>
             Start a New Game!
           </button>
@@ -50,10 +50,10 @@
                 Time Remaining
               </h3>
             </div>
-            <div class="card-body">
-              <h5>
-                <span id="time"></span>
-              </h5>
+            <div class="card-body text-center">
+
+              <span id="time">00</span>
+
             </div>
           </div>
         </div>
@@ -69,6 +69,16 @@
           <div class="jumbotron-fluid question-box justify-content-center py-3">
 
             <h2 id="question">
+              Click the button to start the game
+              <hr>
+             <span class="other-line"> You have 30 seconds to answer the question</span>
+              <hr>
+               If you get it right you get your time back!
+              <hr>
+              <span class="other-line"> Get it wrong and the timer keeps going!</span>
+              <hr>
+               Get 10 questions correct to win!
+              <hr>
               Good Luck
             </h2>
 

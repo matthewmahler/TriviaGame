@@ -15,6 +15,14 @@ body {
   margin-bottom: 20px;
 }
 
+#time{
+  font-family: monospace;
+  font-size: 50px;
+  color: #1A0E1C;
+  text-align: center;
+  background: blck;
+}
+
 h2 {
   font-weight: 900;
   text-align: center;
@@ -157,4 +165,14 @@ li {
   box-shadow: 0 0 #5f5f5e;
   top: 0px;
   background-color: red;
+}
+
+hr{
+  margin: 0 auto;
+  padding: 1px;
+}
+
+.other-line{
+  color: #fff;
+  text-shadow: -1px 0 #131317, 0 1px #131317, 1px 0 #131317, 0 -1px #131317;
 }
