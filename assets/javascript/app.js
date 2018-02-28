@@ -9,8 +9,6 @@ var attempts = 1;
 var correct = 1;
 var gameRunning = false;
 
-
-
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -28,6 +26,9 @@ $('document').ready(function () {
   //go get questions when new game is clicked
 
   function newGame() {
+    if(clockRunning){
+      return;
+    }
     gameRunning = true;
     correct = 1;
     attempts = 1;
@@ -217,7 +218,7 @@ $('document').ready(function () {
 
       clockRunning = true;
     }
-  }
+  }  
 });
 
 
