@@ -3,6 +3,7 @@
 body {
   width: 100%;
   color: #1A0E1C;
+  background-color: #131317;
   background-image: url("../images/background-image.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -168,8 +169,11 @@ li {
 }
 
 hr{
-  margin: 0 auto;
-  padding: 1px;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  border-color: #1A0E1Cff;
+  border-width: 5px;
+
 }
 
 .other-line{

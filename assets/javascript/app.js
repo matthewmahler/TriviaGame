@@ -63,7 +63,7 @@ $('document').ready(function () {
         console.log(trivia.results[q].correct_answer)
       }
     };
-    xmlhttp.open("GET", "https://opentdb.com/api.php?amount=50&category=15&type=multiple", true);
+    xmlhttp.open("GET", "https://opentdb.com/api.php?amount=50&difficulty=easy&type=multiple", true);
     xmlhttp.send();
   }
 
@@ -154,7 +154,11 @@ $('document').ready(function () {
       return;
     }
     if (correct === 10) {
-      setTimeout(alert('YOU WIN'), 1000);
+      setTimeout( swal({
+        type: 'success',
+        title: 'YOU WIN!',
+        text: 'Great Job!',
+      }), 1000);
       attempts = 1;
     }
 
@@ -188,7 +192,11 @@ $('document').ready(function () {
       shuffle(i);
       newQuestion();
       selectedAnswer = null;
-      alert('Try Again =)')
+      swal({
+        type: 'error',
+        title: 'WRONG',
+        text: 'Start Over!',
+      })
     }
   }
 
@@ -201,7 +209,11 @@ $('document').ready(function () {
         if (timeleft <= 0) {
           clearInterval(downloadTimer)
           setTimeout(function () {
-            alert("Times Up!");
+            swal({
+              type: 'error',
+              title: 'TIMES UP!',
+              text: 'Try Again!',
+            })
           }, 300);
 
           attempts = (attempts + 1);
