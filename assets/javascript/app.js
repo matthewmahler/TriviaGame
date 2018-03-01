@@ -5,6 +5,7 @@ var q = [Math.floor(Math.random() * 50) + 1];
 var i = [0, 1, 2, 3];
 var clockRunning = false;
 var timeleft;
+var downloadTimer;
 var attempts = 1;
 var correct = 1;
 var gameRunning = false;
@@ -23,10 +24,8 @@ $('document').ready(function () {
   var $newGameButton = document.getElementById('new-game-button');
   $newGameButton.addEventListener('click', newGame);
 
-  //go get questions when new game is clicked
-
   function newGame() {
-    if(clockRunning){
+    if (clockRunning) {
       return;
     }
     gameRunning = true;
@@ -154,15 +153,23 @@ $('document').ready(function () {
       return;
     }
     if (correct === 10) {
-      setTimeout( swal({
+      gameRunning = false;
+      document.getElementById("question").innerText = "You must think your smart";
+      document.getElementById("answer-a").innerHTML = "";
+      document.getElementById("answer-b").innerHTML = "";
+      document.getElementById("answer-c").innerHTML = "";
+      document.getElementById("answer-d").innerHTML = "";
+
+      stopTimer();
+
+      swal({
         type: 'success',
         title: 'YOU WIN!',
         text: 'Great Job!',
-      }), 1000);
-      attempts = 1;
-    }
+      }),
+        attempts = 1;
 
-    if (selectedAnswer == correct_answer) {
+    } else if (selectedAnswer == correct_answer && correct < 10) {
       document.getElementById("correct").innerHTML = correct++;
       var selected = document.getElementById('answer-button-d');
       selected.classList.remove('selected');
@@ -203,19 +210,16 @@ $('document').ready(function () {
   function timer() {
     if (!clockRunning) {
       timeleft = 31;
-      var downloadTimer = setInterval(function () {
+      downloadTimer = setInterval(function () {
         timeleft--;
         document.getElementById("time").textContent = timeleft;
         if (timeleft <= 0) {
           clearInterval(downloadTimer)
-          setTimeout(function () {
-            swal({
-              type: 'error',
-              title: 'TIMES UP!',
-              text: 'Try Again!',
-            })
-          }, 300);
-
+          swal({
+            type: 'error',
+            title: 'TIMES UP!',
+            text: 'Try Again!',
+          })
           attempts = (attempts + 1);
           correct = 1;
           clockRunning = false;
@@ -223,14 +227,19 @@ $('document').ready(function () {
           clearInterval(downloadTimer)
           clockRunning = false;
           document.getElementById("time").textContent = 00;
-          document.getElementById("correct").innerHTML = 0;
+          document.getElementById("correct").innerHTML = 1;
         };
 
       }, 1000);
 
       clockRunning = true;
     }
-  }  
+  }
+  function stopTimer() {
+    clearInterval(downloadTimer)
+    correct = 1;
+    clockRunning = false;
+  }
 });
 
 

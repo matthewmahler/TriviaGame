@@ -72,18 +72,22 @@ h5 {
   top: 6px;
 }
 
+.col-md-7 {
+  border-right: #131317 solid 5px;
+}
+
 .game-space {
   background: linear-gradient(to right, rgba(4, 206, 199, 0.8), rgba(0, 125, 132, 0.8));
   border: #131317 solid 5px;
 }
 
 .question-box {
-  padding: 10px;
+  padding: 5px; 
 }
 
 .answer-box {
   padding: 10px;
-  border-left: #131317 solid 5px;
+  
 }
 
 .score-board {
