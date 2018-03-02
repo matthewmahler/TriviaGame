@@ -20,7 +20,19 @@ function shuffle(a) {
 }
 shuffle(i);
 
-$('document').ready(function () {
+$.ajax({
+  url: "https://opentdb.com/api.php?amount=50&difficulty=easy&type=multiple",
+  method: "GET"
+}).then(function(trivia) {
+  q = [Math.floor(Math.random() * 50) + 1];
+  correct_answer = trivia.results[q].correct_answer;
+  allAnswers = trivia.results[q].incorrect_answers.concat(trivia.results[q].correct_answer);
+  console.log(q);
+  console.log(i);
+  console.log(trivia.results[q]);
+  console.log(allAnswers);
+  console.log(trivia.results[q].correct_answer)
+
 
   var $newGameButton = document.getElementById('new-game-button');
   $newGameButton.addEventListener('click', newGame);
@@ -50,12 +62,7 @@ $('document').ready(function () {
 
   function newQuestion() {
     document.getElementById("attempts").innerHTML = attempts;
-    document.getElementById("correct").innerHTML = correct;
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        trivia = JSON.parse(this.responseText);
+    document.getElementById("correct").innerHTML = correct;    
         q = [Math.floor(Math.random() * 50) + 1];
         correct_answer = trivia.results[q].correct_answer;
         allAnswers = trivia.results[q].incorrect_answers.concat(trivia.results[q].correct_answer);
@@ -72,10 +79,7 @@ $('document').ready(function () {
         console.log(allAnswers);
         console.log(trivia.results[q].correct_answer)
       }
-    };
-    xmlhttp.open("GET", "https://opentdb.com/api.php?amount=50&difficulty=easy&type=multiple", true);
-    xmlhttp.send();
-  }
+   
 
   //answer buttons
 
