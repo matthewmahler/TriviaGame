@@ -1,7 +1,7 @@
 var allAnswers;
 var correct_answer;
 var trivia;
-var q = [Math.floor(Math.random() * 50) + 1];
+var q;
 var i = [0, 1, 2, 3];
 var clockRunning = false;
 var timeleft;
@@ -9,6 +9,7 @@ var downloadTimer;
 var attempts = 1;
 var correct = 1;
 var gameRunning = false;
+var best = 0;
 
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
@@ -35,6 +36,7 @@ $('document').ready(function () {
     newQuestion();
     document.getElementById("attempts").innerHTML = attempts;
     document.getElementById("correct").innerHTML = correct;
+    document.getElementById("best").innerHTML = best;
   }
 
   function newQuestion() {
@@ -45,7 +47,7 @@ $('document').ready(function () {
     xmlhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         trivia = JSON.parse(this.responseText);
-        var q = [Math.floor(Math.random() * 50) + 1];
+        q = [Math.floor(Math.random() * 50) + 1];
         correct_answer = trivia.results[q].correct_answer;
         allAnswers = trivia.results[q].incorrect_answers.concat(trivia.results[q].correct_answer);
 
@@ -152,6 +154,8 @@ $('document').ready(function () {
     if (!gameRunning) {
       return;
     }
+
+
     if (correct === 10) {
       gameRunning = false;
       document.getElementById("question").innerText = "You must think your smart";
@@ -159,9 +163,8 @@ $('document').ready(function () {
       document.getElementById("answer-b").innerHTML = "";
       document.getElementById("answer-c").innerHTML = "";
       document.getElementById("answer-d").innerHTML = "";
-
+      document.getElementById("best").innerHTML = "10"
       stopTimer();
-
       swal({
         type: 'success',
         title: 'YOU WIN!',
@@ -170,6 +173,7 @@ $('document').ready(function () {
         attempts = 1;
 
     } else if (selectedAnswer == correct_answer && correct < 10) {
+
       document.getElementById("correct").innerHTML = correct++;
       var selected = document.getElementById('answer-button-d');
       selected.classList.remove('selected');
@@ -181,6 +185,7 @@ $('document').ready(function () {
       selected.classList.remove('selected');
       shuffle(i);
       newQuestion();
+      setBest();
       selectedAnswer = null;
       timeleft = 31;
     } else {
@@ -240,6 +245,14 @@ $('document').ready(function () {
     correct = 1;
     clockRunning = false;
   }
+
+function setBest(){
+  if (correct > best){
+    best = correct;
+    document.getElementById("best").innerHTML = (best - 1);
+  }
+}
+
 });
 
 
