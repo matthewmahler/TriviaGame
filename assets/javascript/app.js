@@ -38,6 +38,14 @@ $('document').ready(function () {
     document.getElementById("attempts").innerHTML = attempts;
     document.getElementById("correct").innerHTML = correct;
     document.getElementById("best").innerHTML = best;
+    var selected = document.getElementById('answer-button-d');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-a');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-b');
+    selected.classList.remove('selected');
+    var selected = document.getElementById('answer-button-c');
+    selected.classList.remove('selected');
   }
 
   function newQuestion() {
@@ -83,6 +91,9 @@ $('document').ready(function () {
   $selectedAnswerD.addEventListener('click', selectD);
 
   function selectA() {
+    if(!gameRunning){
+      return
+    }else{
     var selected = document.getElementById('answer-button-a');
     selected.classList.add('selected');
     var selected = document.getElementById('answer-button-b');
@@ -94,9 +105,13 @@ $('document').ready(function () {
     selectedAnswer = allAnswers[i[0]];
     console.log(allAnswers[i[0]]);
     console.log(selectedAnswer);
+    }
   }
 
   function selectB() {
+    if(!gameRunning){
+      return
+    }else{
     var selected = document.getElementById('answer-button-b');
     selected.classList.add('selected');
     var selected = document.getElementById('answer-button-a');
@@ -108,9 +123,13 @@ $('document').ready(function () {
     selectedAnswer = allAnswers[i[1]];
     console.log(allAnswers[i[1]]);
     console.log(selectedAnswer);
+    }
   }
 
   function selectC() {
+    if(!gameRunning){
+      return
+    }else{
     var selected = document.getElementById('answer-button-c');
     selected.classList.add('selected');
     var selected = document.getElementById('answer-button-a');
@@ -122,10 +141,13 @@ $('document').ready(function () {
     selectedAnswer = allAnswers[i[2]];
     console.log(allAnswers[i[2]]);
     console.log(selectedAnswer);
-
+    }
   }
 
   function selectD() {
+    if(!gameRunning){
+      return
+    }else{
     var selected = document.getElementById('answer-button-d');
     selected.classList.add('selected');
     var selected = document.getElementById('answer-button-a');
@@ -137,6 +159,7 @@ $('document').ready(function () {
     selectedAnswer = allAnswers[i[3]];
     console.log(allAnswers[i[3]]);
     console.log(selectedAnswer);
+    }
   }
 
   var $selectedFinalAnswer = document.getElementById('final-answer-button');
@@ -228,6 +251,7 @@ $('document').ready(function () {
           })
           attempts = (attempts + 1);
           correct = 1;
+          gameRunning = false;
           clockRunning = false;
         } else if (correct === 11) {
           clearInterval(downloadTimer)
@@ -247,12 +271,12 @@ $('document').ready(function () {
     clockRunning = false;
   }
 
-function setBest(){
-  if (correct > best){
-    best = correct;
-    document.getElementById("best").innerHTML = (best - 1);
+  function setBest() {
+    if (correct > best) {
+      best = correct;
+      document.getElementById("best").innerHTML = (best - 1);
+    }
   }
-}
 
 });
 
