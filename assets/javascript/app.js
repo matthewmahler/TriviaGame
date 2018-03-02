@@ -32,6 +32,7 @@ $('document').ready(function () {
     gameRunning = true;
     correct = 1;
     attempts = 1;
+    best = 0;
     timer();
     newQuestion();
     document.getElementById("attempts").innerHTML = attempts;
